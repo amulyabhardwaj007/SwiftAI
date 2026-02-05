@@ -112,7 +112,7 @@ export const generateImage = async (req, res) => {
 
     await sql`
       INSERT INTO creations (user_id, prompt, content,type,publish)
-      VALUES (${userId}, ${prompt}, ${secure_url},'image',${publish ??false })
+      VALUES (${userId}, ${prompt}, ${secure_url},'image',${publish ?? false })
     `;
 
     res.status(200).json({
@@ -141,7 +141,6 @@ export const backgroundRemove = async (req, res) => {
         {
           effect: 'background_removal',
           background_removal:'remove_the_background',
-
          }
       ]
     })
@@ -156,7 +155,7 @@ export const backgroundRemove = async (req, res) => {
       content:secure_url,
     });
   } catch (error) {
-    console.error("Error removeing bacground:",  error);
+    console.error("Error removing bacground:",  error);
     res.status(500).json({
       success: false,
       message: "Failed to remove background",

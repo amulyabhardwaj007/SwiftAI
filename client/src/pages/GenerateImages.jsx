@@ -129,7 +129,7 @@ const GenerateImages = () => {
             <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
               <Image className="w-5 h-5 " />
               <p>
-                Enter a whatyou want to see and click "Generate Image" to get
+                Enter what you want to see and click "Generate Image" to get
                 started
               </p>
             </div>
