@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Markdown from "react-markdown";
-const CreationItem = ({ item }) => {
+import { Trash2 } from "lucide-react";
+
+const CreationItem = ({ item, onDelete, deleting }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -9,7 +11,7 @@ const CreationItem = ({ item }) => {
       className="p-4 max-w-5xl border border-gray-200 rounded-lg shadow-sm bg-white cursor-pointer"
     >
       {/* Main row */}
-      <div className="flex items-center justify-between text-sm">
+      <div className="flex items-start justify-between gap-4 text-sm">
         <div className="flex gap-4">
           <div>
             <h2 className="font-medium text-gray-800">{item.prompt}</h2>
@@ -18,9 +20,23 @@ const CreationItem = ({ item }) => {
             </p>
           </div>
         </div>
-        <button className="bg-[#EFF6FF] border border-[#BFDBFE] text-[#1E40AF] px-4 py-1 rounded-full">
-          {item.type}
-        </button>
+        <div className="flex items-center gap-2">
+          <button className="bg-[#EFF6FF] border border-[#BFDBFE] text-[#1E40AF] px-4 py-1 rounded-full">
+            {item.type}
+          </button>
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onDelete(item.id);
+            }}
+            disabled={deleting}
+            className="flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3 py-1 text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <Trash2 className="h-4 w-4" />
+            {deleting ? "Deleting..." : "Delete"}
+          </button>
+        </div>
       </div>
 
       {/* Expanded content */}

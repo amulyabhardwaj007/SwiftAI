@@ -1,42 +1,57 @@
-import { assets } from "../assets/assets";
-
 export default function Footer() {
-    return (
-        <footer className="px-6 md:px-16 lg:px-24 xl:px-32 pt-8 w-full text-gray-500 mt-20 ">
-            <div className="flex flex-col md:flex-row justify-between w-full gap-10 border-b border-gray-500/30 pb-6 ">
-                <div className="md:max-w-96">
-                    <img className="h-9" src={assets.logo} alt="logo" />
-                    <p className="mt-6 text-sm">
-                        Exprience the power of AI with QuickAI. <br/>
-                        Transform of content creation with our suit of AI tools.Write Article, 
-                        Generate Images, Review Resume and Inhance your workflow 
-                    </p>
-                </div>
-                <div className="flex-1 flex items-start md:justify-end gap-20">
-                    <div>
-                        <h2 className="font-semibold mb-5 text-gray-800">Company</h2>
-                        <ul className="text-sm space-y-2">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h2 className="font-semibold text-gray-800 mb-5">Subscribe to our newsletter</h2>
-                        <div className="text-sm space-y-2">
-                            <p>The latest news, articles, and resources, sent to your inbox weekly.</p>
-                            <div className="flex items-center gap-2 pt-4">
-                                <input className="border border-gray-500/30 placeholder-gray-500 focus:ring-2 ring-indigo-600 outline-none w-full max-w-64 h-9 rounded px-2" type="email" placeholder="Enter your email" />
-                                <button className="bg-primary w-24 h-9 text-white rounded cursor-pointer">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <footer className="mt-20 w-full bg-slate-950 px-6 pt-12 text-slate-300 md:px-16 lg:px-24 xl:px-32">
+      <div className="flex w-full flex-col justify-between gap-10 border-b border-white/10 pb-8 md:flex-row">
+        <div className="md:max-w-96">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 via-blue-500 to-cyan-400 text-lg font-bold text-white">
+              S
             </div>
-            <p className="pt-4 text-center text-xs md:text-sm pb-5">
-                Copyright 2024 © QuickAI. All Right Reserved.
-            </p>
-        </footer>
-    );
-};
+            <div>
+              <p className="text-lg font-semibold text-white">Swift</p>
+              <p className="text-sm text-slate-400">AI workspace for builders</p>
+            </div>
+          </div>
+
+          <p className="mt-6 text-sm leading-6 text-slate-400">
+            Build articles, blog ideas, images, and resume feedback in one fast workflow.
+            Swift is designed to keep creation sharp, simple, and organized.
+          </p>
+        </div>
+
+        <div className="flex flex-1 items-start gap-20 md:justify-end">
+          <div>
+            <h2 className="mb-5 font-semibold text-white">Company</h2>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Contact us</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="mb-5 font-semibold text-white">Subscribe to our newsletter</h2>
+            <div className="space-y-2 text-sm">
+              <p className="text-slate-400">Product updates, new tools, and useful AI workflow ideas.</p>
+              <div className="flex items-center gap-2 pt-4">
+                <input
+                  className="h-10 w-full max-w-64 rounded-xl border border-white/10 bg-white/5 px-3 text-white placeholder-slate-500 outline-none ring-sky-500 focus:ring-2"
+                  type="email"
+                  placeholder="Enter your email"
+                />
+                <button className="h-10 cursor-pointer rounded-xl bg-sky-500 px-4 text-white transition hover:bg-sky-400">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p className="pb-6 pt-4 text-center text-xs text-slate-500 md:text-sm">
+        Copyright 2026 (c) Swift. All rights reserved.
+      </p>
+    </footer>
+  );
+}

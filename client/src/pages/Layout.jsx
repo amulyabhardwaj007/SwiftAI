@@ -1,51 +1,53 @@
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import { useUser, SignIn } from '@clerk/clerk-react';
+import { useUser, SignIn } from "@clerk/clerk-react";
 
 const Layout = () => {
   const navigate = useNavigate();
   const [sidebar, setSidebar] = useState(false);
   const { user } = useUser();
-  
+
   if (!user) {
     return (
-      <div className='flex items-center justify-center h-screen'>
+      <div className="flex h-screen items-center justify-center">
         <SignIn />
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-screen">
-      {/* Navbar */}
-      <nav className="w-full px-8 min-h-14 flex items-center justify-between border-b border-gray-200">
-        <h1 
-          onClick={() => navigate('/')} 
-          className="text-2xl sm:text-3xl font-extrabold tracking-tight 
-          bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
-          bg-clip-text text-transparent cursor-pointer"
+    <div className="flex h-screen flex-col bg-slate-50">
+      <nav className="flex min-h-16 w-full items-center justify-between border-b border-slate-200 bg-white/80 px-8 backdrop-blur-xl">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-3 cursor-pointer"
         >
-          SwiftAI
-        </h1>
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 via-blue-500 to-cyan-400 text-sm font-bold text-white">
+            S
+          </span>
+          <span className="text-2xl font-extrabold tracking-tight text-slate-900">
+            Swift
+          </span>
+        </button>
+
         {sidebar ? (
           <X
             onClick={() => setSidebar(false)}
-            className="w-6 h-6 text-gray-600 sm:hidden cursor-pointer"
+            className="h-6 w-6 cursor-pointer text-gray-600 sm:hidden"
           />
         ) : (
           <Menu
             onClick={() => setSidebar(true)}
-            className="w-6 h-6 text-gray-600 sm:hidden cursor-pointer"
+            className="h-6 w-6 cursor-pointer text-gray-600 sm:hidden"
           />
         )}
       </nav>
 
-      {/* Sidebar + Content */}
-      <div className="flex flex-1 w-full h-[calc(100vh-56px)] overflow-hidden">
+      <div className="flex h-[calc(100vh-64px)] flex-1 w-full overflow-hidden">
         <Sidebar sidebar={sidebar} setSidebar={setSidebar} />
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <Outlet />
         </div>
       </div>

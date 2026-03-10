@@ -45,6 +45,65 @@ export const getPublicCreations = async (req, res) => {
   }
 };
 
+export const deleteUserCreation = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const { id } = req.params;
+
+    const [creation] = await sql`
+      SELECT id FROM creations WHERE id = ${id} AND user_id = ${userId}
+    `;
+
+    if (!creation) {
+      return res.status(404).json({
+        success: false,
+        message: "Creation not found",
+      });
+    }
+
+    await sql`
+      DELETE FROM creations WHERE id = ${id} AND user_id = ${userId}
+    `;
+
+    res.status(200).json({
+      success: true,
+      message: "Creation deleted successfully",
+    });
+  } catch (error) {
+    console.error("Error deleting user creation:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete creation",
+      error: error.message,
+    });
+  }
+};
+
+export const clearUserCreations = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+
+    const deletedCreations = await sql`
+      DELETE FROM creations
+      WHERE user_id = ${userId}
+      RETURNING id
+    `;
+
+    res.status(200).json({
+      success: true,
+      message: "History cleared successfully",
+      deletedCount: deletedCreations.length,
+    });
+  } catch (error) {
+    console.error("Error clearing user creations:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to clear history",
+      error: error.message,
+    });
+  }
+};
+
 
 export const toggleLikeCreations = async (req, res) => {
   try {

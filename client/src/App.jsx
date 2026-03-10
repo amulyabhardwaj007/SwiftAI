@@ -15,7 +15,7 @@ import {Toaster} from 'react-hot-toast'
 const App = () => {
 
   return (
-    document.title = "Swift.AI",
+    document.title = "Swift",
     <div>
       <Toaster/>
       <Routes>

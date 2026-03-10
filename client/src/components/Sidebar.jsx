@@ -22,28 +22,27 @@ const navItems = [
   { to: "/ai/review-resume", label: "Review Resume", Icon: FileText },
   { to: "/ai/community", label: "Community", Icon: Users },
 ];
+
 const Sidebar = ({ sidebar, setSidebar }) => {
   const { user } = useUser();
   const { signOut, openUserProfile } = useClerk();
 
-  // 🔒 prevent rendering when user is not loaded yet
   if (!user) return null;
 
   return (
     <div
-      className={`w-60 bg-white border-r border-gray-200 flex flex-col justify-between items-center max-sm:absolute
-        top-14 bottom-0 ${
-          sidebar ? "translate-x-0" : "max-sm:-translate-x-full"
-        } transition-all duration-300 ease-in-out`}
+      className={`max-sm:absolute top-16 bottom-0 flex w-64 flex-col items-center justify-between border-r border-slate-200 bg-white/90 shadow-sm ${
+        sidebar ? "translate-x-0" : "max-sm:-translate-x-full"
+      } transition-all duration-300 ease-in-out`}
     >
       <div className="my-7 w-full">
         <img
           src={user.imageUrl}
-          className="w-13 rounded-full mx-auto"
+          className="mx-auto w-13 rounded-full"
           alt="user Avatar"
         />
         <h1 className="mt-1 text-center">{user.fullName}</h1>
-        <div className="px-6 mt-5 text-sm text-gray-600 font-medium ">
+        <div className="mt-5 px-6 text-sm font-medium text-gray-600">
           {navItems.map(({ to, label, Icon }) => (
             <NavLink
               key={to}
@@ -51,16 +50,16 @@ const Sidebar = ({ sidebar, setSidebar }) => {
               end={to === "/ai"}
               onClick={() => setSidebar(false)}
               className={({ isActive }) =>
-                `px-3.5 py-2.5 flex items-center gap-3 rounded ${
+                `flex items-center gap-3 rounded-xl px-3.5 py-2.5 ${
                   isActive
-                    ? "bg-gradient-to-r from-[#3C81F6] to-[#9234EA] text-white"
-                    : ""
+                    ? "bg-slate-950 text-white shadow-lg shadow-slate-200"
+                    : "hover:bg-slate-100"
                 }`
               }
             >
               {({ isActive }) => (
                 <>
-                  <Icon className={`w-4 h-4 ${isActive ? "text-white" : ""}`} />
+                  <Icon className={`h-4 w-4 ${isActive ? "text-white" : ""}`} />
                   <span>{label}</span>
                 </>
               )}
@@ -68,16 +67,16 @@ const Sidebar = ({ sidebar, setSidebar }) => {
           ))}
         </div>
       </div>
-      <div className="w-full border-t border-gray-200 p-4 px-7 flex items-center justify-between">
-        <div onClick={openUserProfile} className="flex gap-2 items-center cursor-pointer">
-            <img src={user.imageUrl} alt="user-image" className="w-8 rounded-full" />
-            <div className="text-sm font-medium">
-                {user.fullName}
-            </div>
 
+      <div className="flex w-full items-center justify-between border-t border-slate-200 p-4 px-7">
+        <div onClick={openUserProfile} className="flex cursor-pointer items-center gap-2">
+          <img src={user.imageUrl} alt="user-image" className="w-8 rounded-full" />
+          <div className="text-sm font-medium">{user.fullName}</div>
         </div>
-        <LogOut onClick={signOut}  className="w-4.5 text-gray-400 hover:text-gray-700 transition cursor-pointer  "/>
-
+        <LogOut
+          onClick={signOut}
+          className="w-4.5 cursor-pointer text-gray-400 transition hover:text-gray-700"
+        />
       </div>
     </div>
   );
