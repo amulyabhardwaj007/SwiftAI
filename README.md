@@ -2,6 +2,7 @@
 
 Frontend for **Swift**, a React + Vite app that turns a single dashboard into a compact AI content studio. Users can sign in with Clerk, generate content, edit visual assets, manage their own creations, and publish images into a shared community feed.
 
+
 ## What It Does
 
 - Writes AI-generated articles
